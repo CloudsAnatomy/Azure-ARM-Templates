@@ -1,0 +1,32 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: AzureKeyVault@2
+  inputs:
+    azureSubscription: 'SC-DEVOPS'
+    KeyVaultName: 'KV-CA-ALL'
+    SecretsFilter: 'LocalAdmin'
+    RunAsPreJob: false
+- task: AzureResourceManagerTemplateDeployment@3
+  inputs:
+    deploymentScope: 'Resource Group'
+    azureResourceManagerConnection: 'SC-DEVOPS'
+    subscriptionId: '40a31c62-0120-42ee-890f-0849c9ad5fd2'
+    action: 'Create Or Update Resource Group'
+    resourceGroupName: 'RG-CA-DEVOPS'
+    location: 'Canada Central'
+    templateLocation: 'Linked artifact'
+    csmFile: 'azuredeploy.json'
+    csmParametersFile: 'azuredeploy.parameters.json'
+    overrideParameters: '-adminPassword $(LocalAdmin)'
+    deploymentMode: 'Incremental'
+    deploymentName: 'DEPLOY_WIN_SERVER_ARM_TEMPLATE'

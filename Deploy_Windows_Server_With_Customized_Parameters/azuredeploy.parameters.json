@@ -1,0 +1,36 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "adminUsername": {
+      "value": "VM-ADMIN"
+    },
+    "adminPassword": {
+      "value": ""
+    },
+    "dnsLabelPrefix": {
+      "value": "cadevopsvm2"
+    },
+    "vmName": {
+      "value": "AZ1DEVOPS-1"
+    },
+    "publicIpName": {
+      "value": "AZ1DEVOPS-1-PIP"
+    },
+    "vmSize" :{
+      "value": "Standard_D2s_v5"
+    },
+    "nicName" :{
+      "value": "AZ1DEVOPS-1-NIC"
+    },
+    "nsgName":{
+      "value": "AZ1DEVOPS-1-NSG"
+    },
+    "vnetName":{
+      "value": "VNET-CA-DEVOPS"
+    },
+    "snetName":{
+      "value": "SNET-CA-LAN-1"
+    }
+  }
+}
